@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    body {
+    background-image: url("cards/back.jpg");
+    }
+	button.butt {
+	color: #fff; 
+	background: #FFA500; 
+	padding: 5px; 
+	border-radius: 5px;
+	border: 2px solid #FF8247;
+	} 
+	button.butt:hover { 
+	background: #FF6347; 
+	}
+</style>
+</head>
+<body>
+<canvas id='canvas' width="1450" height="700"></canvas>
+<form>
+<button class="butt" onclick="">New Game</button>
+</form>
+<script language='JavaScript' type='text/JavaScript' src='mainofcards.js'> 
+ </script>
+<button class="butt" onclick="check()">Check Game</button>
+<button class="butt" onclick="cancel()">Cancel</button>
+<script language='JavaScript' type='text/JavaScript'>
+
+ var canvas = document.getElementById("canvas");
+ var ctx = canvas.getContext("2d");
+ 
+ let hg = 180;
+ let wd = 124;
+ let x = 10;
+ let y = 10;
+ 
+ deck = new Deck();
+ deck.rand_deck();
+ 
+ let k = 0;
+ let masIm = [];
+ 
+ 
+ for (let j=0;j<52;j++){
+     image = new Image();
+     image.src = deck.dealt_deck[k].name;
+	 masIm[j]=image;
+	 k++;
+ }
+ image = new Image();
+ image.src = "cards/fon.jpg";
+ masIm[52]=image;
+
+window.onload = function() {
+ctx.drawImage(masIm[52],0,0,1450,700);
+ for (let j=0;j<52;j++){
+ if (deck.dealt_deck[j].view == 1){
+	x = deck.dealt_deck[j].x;
+	y = deck.dealt_deck[j].y;
+    ctx.drawImage(masIm[j], x, y, wd, hg);
+	}
+ }
+}
+ </script>
+</body>
+</html>
